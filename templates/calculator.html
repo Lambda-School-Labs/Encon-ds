@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+    <p><h1>Calculator Page</h1></p>
+    <form action="/calculator/output" method="POST">
+
+        <label>Device:</label><input type="text" name="device" 
+        placeholder="coffee maker" value="coffee maker">
+
+        <label>State:</label><input type="text" name="state" 
+        placeholder="Tennessee" value="Tennessee">
+
+        <label>Hours:</label><input type="number" name="hours" 
+        placeholder="6" value="6">
+
+        <label>Days:</label><input type="number" name="days" 
+        placeholder="5" value="5">
+
+        <button>Submit</button>
+    </form>
+    </form>
+{% endblock content %}
