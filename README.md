@@ -14,7 +14,8 @@ List of common household devices and typical wattage level they use ```data/devi
 ```cal.py```
 
 **Server:** Flask Ask  
-```from flask import Flask```  
+```from flask import Flask```
+
 ```app = Flask(__name__)```  
 Commands on Windows: ```set FLASK_APP=app.py``` ```flask run```
 
@@ -24,7 +25,8 @@ https://encon.herokuapp.com/
 https://encon.herokuapp.com/Iron/Missouri/8/5  
 
 You can test out the function by using the url to insert inputs:  
-```/<device>/<state>/<hours>/<days>``` 
+```/<device>/<state>/<hours>/<days>```
+
 Where device and state match options in coresponding csv files; hours (0-24); days of the week (0-7)
 
 **AWS Deployment** (coming soon)
