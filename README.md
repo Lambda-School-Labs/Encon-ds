@@ -25,8 +25,7 @@ https://encon.herokuapp.com/
 https://encon.herokuapp.com/Iron/Missouri/8/5  
 
 You can test out the function by using the url to insert inputs:  
-```/<device>/<state>/<hours>/<days>```
-
+```/<device>/<state>/<hours>/<days>```  
 Where device and state match options in coresponding csv files; hours (0-24); days of the week (0-7)
 
 **AWS Deployment** (coming soon)
