@@ -28,7 +28,7 @@ def cal_output():
     print("------------------------------")
     device = request.form["device"] #<class 'str'>
     state = request.form["state"] #<class 'str'>
-    hours = int(request.form["hours"]) #<class 'int'>
+    hours = float(request.form["hours"]) #<class 'int'>
     days = int(request.form["days"]) #<class 'int'>
     x = {"device": device,"state": state,"hours": hours,"days": days}
     y = calculator(device,state,hours,days)
@@ -41,11 +41,11 @@ def cal(device,state,hours,days):
     print("------------------------------")
     device = device
     state = state
-    hours = int(hours)
-    days = int(days)
+    hours = float(hours)
+    days = float(days)
     x = {"device": device,"state": state,"hours": hours,"days": days}
     y = calculator(device,state,hours,days)
-    return {"inputs": x, "outputs": y}
+    return jsonify(y)
 
 
 
