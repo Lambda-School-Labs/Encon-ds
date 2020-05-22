@@ -13,7 +13,7 @@ List of common household devices and typical wattage level they use ```data/devi
 **Calculator Function**  
 ```cal.py```
 
-**Server:** Flask Ask  
+**Application Framework:** Flask API  
 ```from flask import Flask```
 
 ```app = Flask(__name__)```  
@@ -28,4 +28,6 @@ You can test out the function by using the url to insert inputs:
 ```/<device>/<state>/<hours>/<days>```  
 Where device and state match options in coresponding csv files; hours (0-24); days of the week (0-7)
 
-**AWS Deployment** (coming soon)
+**AWS Deployment**  
+http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/  
+http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/Ceiling%20Fan/Missouri/8/5
