@@ -4,10 +4,11 @@
 # Imports
 from flask import Flask, render_template, request, jsonify, redirect
 from cal import calculator
-
+from flask_cors import CORS
 
 # Instantiate App
 app = Flask(__name__) #name of module
+CORS(app)
 
 # Routes
 @app.route("/")
