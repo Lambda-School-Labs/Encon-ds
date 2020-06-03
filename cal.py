@@ -34,6 +34,15 @@ def calculator(device,state,hours,days):
   energy_used = (65 * 8 * (5*52)) / 1000
   cost_per_year = energy_used * .0928
   '''
+  # Check values
+  valid_hours= range(0,25)
+  if hours > 24:
+    raise ValueError ("calculator: hours must be between %r." % valid_hours)
+  valid_days = {0,1,2,3,4,5,6,7} #<class 'set'>
+  if days not in valid_days:
+    raise ValueError ("calculator: days must be one of %r." % valid_days)
+  
+  # Function
   device = device
   wattage = devices[devices["device"]== device]["wattage"].item()
   state = state 
