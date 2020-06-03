@@ -15,8 +15,10 @@
 {% if filename %}
 	<div>
 		<img alt="test" src="{{ url_for('display_image', filename=filename) }}">
+		<p>{{filename}} {{result}}</p>
 	</div>
 {% endif %}
+
 <form method="post" action="/upload" enctype="multipart/form-data">
     <dl>
 		<p>

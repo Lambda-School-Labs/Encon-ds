@@ -8,7 +8,7 @@ from cal import calculator
 from classification import predict
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-from resnet import res_model
+from resnet import res_model, im23
 import os
 
 # Instantiate App
@@ -22,6 +22,9 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # app.config['upload_file'] = upload_file #name of module
 CORS(app)
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Routes
 @app.route("/")
@@ -61,9 +64,6 @@ def cal(device,state,hours,days):
     y = calculator(device,state,hours,days)
     return jsonify(y)
 
-
-def allowed_file(filename):
-	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 	
 @app.route('/upload')
 def upload_form():
@@ -83,7 +83,7 @@ def upload_image():
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_image filename: ' + filename)
 		# flash('Image successfully uploaded and displayed')
-		return render_template('upload.html', filename=filename)
+		return render_template('upload.html', filename=filename, result=res_model('./static/uploads/'+filename))
 	else:
 		# flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
