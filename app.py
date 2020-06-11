@@ -9,13 +9,9 @@ from classification import predict
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from resnet import res_model
+rom flask import send_from_directory
 import os
-from tensorflow.keras.preprocessing.image import load_img
 
-# Instantiate App
-# upload_file = '/path/to/the/uploads'
-# ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-# path = os.makedirs(os.path.join(app.instance_path, 'uploads'), exist_ok=True)
 UPLOAD_FOLDER = './static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 path = os.path.join(UPLOAD_FOLDER)
@@ -94,31 +90,28 @@ def upload_image():
 
 
 
-from flask import send_from_directory
-
 # @app.route('/upload', methods=['POST'])
 # def upload_image():
 #     img = request.files['file']
-#     filename = load_img(img, target_size=(224, 224))
-#     # filename = Image.open(img)
+#     filename = Image.open(img)
 #     return render_template('upload.html', filename=filename, result=res_model(filename))
 
 
 
-@app.route("/predict",methods=["POST"])
+@app.route("/predict/<image>",methods=["POST"])
 def predict():
     image=request.files['file']
     prediction = res_model(image)
     return prediction
 
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    filename = send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
-    result=res_model('./static/uploads/'+filename)
+# @app.route('/uploads/<filename>')
+# def uploaded_file(filename):
+#     filename = send_from_directory(app.config['UPLOAD_FOLDER'],
+#                                filename)
+#     result=res_model(path + filename)
 
-    return result
+#     return result
 
 @app.route('/display/<filename>')
 def display_image(filename):
