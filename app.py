@@ -9,7 +9,7 @@ from classification import predict
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from resnet import res_model
-rom flask import send_from_directory
+from flask import send_from_directory
 import os
 
 UPLOAD_FOLDER = './static/uploads'
