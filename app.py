@@ -2,7 +2,7 @@
 # set FLASK_APP=app.py
 
 # Imports
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 import urllib.request
 from cal import calculator
 from classification import predict
@@ -10,6 +10,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from resnet import res_model
 import os
+from tensorflow.keras.preprocessing.image import load_img
 
 # Instantiate App
 # upload_file = '/path/to/the/uploads'
@@ -17,6 +18,7 @@ import os
 # path = os.makedirs(os.path.join(app.instance_path, 'uploads'), exist_ok=True)
 UPLOAD_FOLDER = './static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+path = os.path.join(UPLOAD_FOLDER)
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -80,20 +82,48 @@ def upload_image():
 		return redirect(request.url)
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
-		# flash('Image successfully uploaded and displayed')
-		return render_template('upload.html', filename=filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))	
+		return render_template('upload.html', filename=filename, result=res_model('./static/uploads/'+filename))
+        # return jsonify(res_model('./static/uploads/'+filename))
 	else:
 		# flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
+# def delete_after(path, file):
+#     removed = os.remove(path + filename)
+#     return removed 
+
+
+
+from flask import send_from_directory
+
+# @app.route('/upload', methods=['POST'])
+# def upload_image():
+#     img = request.files['file']
+#     filename = load_img(img, target_size=(224, 224))
+#     # filename = Image.open(img)
+#     return render_template('upload.html', filename=filename, result=res_model(filename))
+
+
+
+@app.route("/predict",methods=["POST"])
+def predict():
+    image=request.files['file']
+    prediction = res_model(image)
+    return prediction
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    filename = send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+    result=res_model('./static/uploads/'+filename)
+
+    return result
 
 @app.route('/display/<filename>')
 def display_image(filename):
-	print('display_image filename: ' + filename)
+	# print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-
-    
 
 
 

@@ -7,6 +7,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input, decode_pred
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.imagenet_utils import decode_predictions
+from flask import jsonify
 from matplotlib import pyplot as plt 
 # import matplotlib.pyplot as plt
 # %matplotlib inline
@@ -23,8 +24,13 @@ def res_model(file):
     predictions = resnet.predict(processed_image)
   
     label = decode_predictions(predictions)
-    return label[0][0]
+    res = {str(label[0][0][1])}
+    return res
 
-im23 =  './static/uploads/1658.jpg' 
+# im23 =  './static/uploads/washer_644.jpg' 
 
-print(res_model(im23))
+
+
+if __name__ == "__main__":
+    im23 =  './static/uploads/washer_644.jpg' 
+    print(res_model(im23))
