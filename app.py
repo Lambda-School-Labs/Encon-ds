@@ -3,72 +3,72 @@
 
 # Imports
 from flask import Flask, flash, request, redirect, url_for, render_template
-import urllib.request
-from cal import calculator
-from classification import predict
 from flask_cors import CORS
+from cal import calculator
+from resnet import res_model
 from werkzeug.utils import secure_filename
-from resnet import res_model, im23
 import os
 
 # Instantiate App
-# upload_file = '/path/to/the/uploads'
-# ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-# path = os.makedirs(os.path.join(app.instance_path, 'uploads'), exist_ok=True)
-UPLOAD_FOLDER = './static/uploads'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.config['upload_file'] = upload_file #name of module
 CORS(app)
 
+# Allowed file extentions
+UPLOAD_FOLDER = './static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Routes
+
+
+## ROUTES ##
+#Home Route: displays list of devices
 @app.route("/")
 def home():
     print("Visited Home Page")
     print("------------------------------")
     return render_template("home.html")
 
+#Calculator Route: displays calculator function in user friendly form
 @app.route("/calculator")
 def form():
     print("Visited Calculator Form Page")
     print("------------------------------")
     return render_template("calculator.html")
 
+#Ouput Route: displays output from calculator form
 @app.route("/calculator/output", methods=["POST", "GET"])
 def cal_output():
     print("Visited Calculator Output Page")
     print("------------------------------")
-    device = request.form["device"] #<class 'str'>
-    state = request.form["state"] #<class 'str'>
-    hours = float(request.form["hours"]) #<class 'int'>
-    days = int(request.form["days"]) #<class 'int'>
+    device = request.form["device"]
+    state = request.form["state"] 
+    hours = float(request.form["hours"]) 
+    days = int(request.form["days"]) 
     x = {"device": device,"state": state,"hours": hours,"days": days}
     y = calculator(device,state,hours,days)
     return {"inputs": x, "outputs": y}
 
+#API Route: Takes in FE request and returns json response
 @app.route("/<device>/<state>/<hours>/<days>", methods=["POST", "GET"])
-# Ceiling Fan/Missouri/8/5
+#Example: Ceiling Fan/Missouri/8/5
 def cal(device,state,hours,days):
     print("Visited Calculator URL Page")
     print("------------------------------")
     device = device
     state = state
     hours = float(hours)
-    days = float(days)
-    x = {"device": device,"state": state,"hours": hours,"days": days}
+    days = int(days)
     y = calculator(device,state,hours,days)
     return jsonify(y)
 
-	
+#Upload Form Route: allows user to upload image
 @app.route('/upload')
 def upload_form():
-	return render_template('upload.html')
+	return render_template("upload.html")
 
+#Upload Prediction Route: runs image through model and returns prediction
 @app.route('/upload', methods=['POST'])
 def upload_image():
 	if 'file' not in request.files:
@@ -81,11 +81,8 @@ def upload_image():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
-		# flash('Image successfully uploaded and displayed')
 		return render_template('upload.html', filename=filename, result=res_model('./static/uploads/'+filename))
 	else:
-		# flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
 
 @app.route('/display/<filename>')
@@ -94,8 +91,6 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
     
-
-
 
 
 if __name__ == "__main__":
