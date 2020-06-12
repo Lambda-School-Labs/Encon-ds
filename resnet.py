@@ -9,28 +9,30 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.imagenet_utils import decode_predictions
 from flask import jsonify
 from matplotlib import pyplot as plt 
-# import matplotlib.pyplot as plt
-# %matplotlib inline
+import pandas as pd
+import os
 
-# resnet_model = resnet50.ResNet50(weights='imagenet')
+# Data files
+path_app_info = os.path.join(os.getcwd(),"data/app_info.csv")
+app_info = pd.read_csv(path_app_info)
+
 resnet = ResNet50(weights='imagenet')
 
 def res_model(file):
-    original = load_img(file, target_size=(224, 224))
-    numpy_image = img_to_array(original)
-    image_batch = np.expand_dims(numpy_image, axis=0)
-    plt.imshow(np.uint8(image_batch[0]))
-    processed_image = preprocess_input(image_batch.copy())
-    predictions = resnet.predict(processed_image)
-  
+    img = load_img(file, target_size=(224, 224))
+    img = img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    plt.imshow(np.uint8(img[0]))
+    img = preprocess_input(img.copy())
+    predictions = resnet.predict(img)
     label = decode_predictions(predictions)
-    res = {str(label[0][0][1])}
-    return res
+    res = str(label[0][0][1])
+    detection = {str(label[0][0][-2:])}
+    info = app_info.loc[app_info['appliances'] == res, 'tips']
+    info = {str(info)}
 
-# im23 =  './static/uploads/washer_644.jpg' 
+    return detection, info
 
-
-
-if __name__ == "__main__":
-    im23 =  './static/uploads/washer_644.jpg' 
-    print(res_model(im23))
+# if __name__ == "__main__":
+#     im23 =  './static/washer_644.jpg' 
+#     print(res_model(im23))

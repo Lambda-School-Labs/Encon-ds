@@ -12,7 +12,7 @@ from resnet import res_model
 from flask import send_from_directory
 import os
 
-UPLOAD_FOLDER = './static/uploads'
+UPLOAD_FOLDER = './static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 path = os.path.join(UPLOAD_FOLDER)
 
@@ -79,7 +79,7 @@ def upload_image():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))	
-		return render_template('upload.html', filename=filename, result=res_model('./static/uploads/'+filename))
+		return render_template('upload.html', filename=filename, result=res_model('./static/'+filename))
         # return jsonify(res_model('./static/uploads/'+filename))
 	else:
 		# flash('Allowed image types are -> png, jpg, jpeg, gif')
@@ -116,7 +116,7 @@ def predict():
 @app.route('/display/<filename>')
 def display_image(filename):
 	# print('display_image filename: ' + filename)
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+	return redirect(url_for('static/' + filename), code=301)
 
 
 
