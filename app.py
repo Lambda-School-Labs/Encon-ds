@@ -70,7 +70,7 @@ def cal(device,state,hours,days):
 def image():
     data = request.get_json()
     
-    # Get imgb64: Base64 Imgage
+    # Get imgb64: Base64 Image
     image = data["imgb64"]
     
     # Convert Base64 string to byte array
