@@ -16,7 +16,7 @@ def res_model(file):
     pred = model.predict(image)
     results = decode_predictions(pred)
     imageID, label, prob = results[0][0]
-    data = [{"label": label, "probability": round(prob,2)}]
+    data = {"label": label, "probability": np.float64(prob)}
     return data
 
 
