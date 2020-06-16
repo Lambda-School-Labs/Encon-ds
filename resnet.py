@@ -7,10 +7,11 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 
-# Data files
-path_states = os.path.join(os.getcwd(),"data/app_info.csv")
+# Data file
+path_app_info = os.path.join(os.getcwd(),"data/app_info.csv")
+app_info = pd.read_csv(path_app_info)
 
-
+# List of appliances classes Resnet model recognizes
 appliances = ['dishwasher', 'washer', 'notebook', 'television', 
               'desktop computer', 'vacuum', 'microvawe', 'refrigerator', 
               'hair blower', 'iron', 'electric fan', 'toaster', 'space heater']
@@ -28,7 +29,7 @@ def res_model(file):
     if data["label"] in appliances:
       return app_info.loc[app_info['appliances'] == data["label"], 'tips'].item()
     else:
-      return "Image is not a common household appliance. Please select a different picture."
+      return data["label"], "Image is not a common household appliance. Please select a different picture."
 
 
 if __name__ == "__main__":
