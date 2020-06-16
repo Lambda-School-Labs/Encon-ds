@@ -18,14 +18,16 @@ def res_model(file):
     image = preprocess_input(image)
     pred = model.predict(image)
     label = decode_predictions(pred)
-    res = str(label[0][0][1])
-    detection = {str(label[0][0][-2:])}
+    res = label[0][0][1]
+    detection = {str(label[0][0][1])}
     info = app_info.loc[app_info['appliances'] == res, 'tips']
-    info = {str(info)}
+    info = info.to_json()
 
-    return detection, info
+    return [detection, info]
+
+
 
 
 # if __name__ == "__main__":
-#     img =  './static/uploads/1658.jpg' 
+#     img =  './static/uploads/.jpg' 
 #     print(res_model(img))

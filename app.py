@@ -2,7 +2,7 @@
 # set FLASK_APP=app.py
 
 # Imports
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 from flask_cors import CORS
 from cal import calculator
 from resnet import res_model
