@@ -2,12 +2,14 @@
 # set FLASK_APP=app.py
 
 # Imports
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 from flask_cors import CORS
+import os
+import base64
+from werkzeug.utils import secure_filename
 from cal import calculator
 from resnet import res_model
-from werkzeug.utils import secure_filename
-import os
+from decode import process_base64
 
 # Instantiate App
 app = Flask(__name__)
@@ -63,6 +65,27 @@ def cal(device,state,hours,days):
     y = calculator(device,state,hours,days)
     return jsonify(y)
 
+# Image API Route
+@app.route("/image", methods=["POST"])
+def image():
+    data = request.get_json()
+    
+    # Get imgb64: Base64 Imgage
+    image = data["imgb64"]
+    
+    # Convert Base64 string to byte array
+    image = process_base64(image)
+    
+    # Decode Array and save png image  file
+    with open("static/uploads/image.png", "wb") as fh:
+        fh.write(base64.decodebytes(image))
+    
+    # Run image through Resnet Model
+    prediction = res_model('./static/uploads/image.png')
+    print(prediction)
+    print(type(prediction))
+    return jsonify(prediction)
+
 #Upload Form Route: allows user to upload image
 @app.route('/upload')
 def upload_form():
@@ -85,12 +108,11 @@ def upload_image():
 	else:
 		return redirect(request.url)
 
+
 @app.route('/display/<filename>')
 def display_image(filename):
 	print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-
-    
 
 
 if __name__ == "__main__":
