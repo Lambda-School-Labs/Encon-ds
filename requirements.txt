@@ -40,3 +40,5 @@ wcwidth==0.1.9
 Werkzeug==1.0.1
 wincertstore==0.2
 flask-cors
+tensorflow==2.0.0
+pillow==7.1.2

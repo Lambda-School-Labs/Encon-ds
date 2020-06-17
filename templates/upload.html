@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Python Flask File Upload Example</h1>
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img alt="test" src="{{ url_for('display_image', filename=filename) }}">
+		<p><b>File:</b> {{filename}}</p>
+		<p><b>Resnet Model Prediction:</b> {{result}}</p>
+		<p>Want to try again? Select a new image!</p>
+	</div>
+{% endif %}
+
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+{% endblock content %}
