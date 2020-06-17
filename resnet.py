@@ -28,7 +28,7 @@ def res_model(file):
     imageID, label, prob = results[0][0]
     data = {"label": label, "probability": np.float64(prob)}
     if data["label"] in appliances:
-      return app_info.loc[app_info['appliances'] == data["label"], 'tips'].item()
+      return data["label"], app_info.loc[app_info['appliances'] == data["label"], 'tips'].item()
     else:
       return data["label"], "Image is not a common household appliance. Please select a different picture."
 
