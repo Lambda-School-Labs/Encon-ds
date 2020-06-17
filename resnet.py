@@ -13,8 +13,9 @@ app_info = pd.read_csv(path_app_info)
 
 # List of appliances classes Resnet model recognizes
 appliances = ['dishwasher', 'washer', 'notebook', 'television', 
-              'desktop computer', 'vacuum', 'microvawe', 'refrigerator', 
-              'hair blower', 'iron', 'electric fan', 'toaster', 'space heater']
+'desktop_computer', 'vacuum', 'microwave', 'refrigerator', 
+'hand_blower', 'iron', 'electric_fan', 'toaster', 'space_heater', 
+'home_theater', 'entertainment_center', 'monitor']
 
 model = ResNet50(weights='imagenet')
 def res_model(file):
