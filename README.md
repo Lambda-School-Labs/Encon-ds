@@ -5,7 +5,7 @@ You can find the project at [Encon DS API](http://enconaq.eba-bqepxksk.us-east-1
 |Avery Quinn| Gagan Singh |Iulia Stremciuc|
 |:----: | :----: | :----: |
 |[<img src="https://ca.slack-edge.com/ESZCHB482-W012JQ43VK5-a88ed1ada5a4-512" width = "200" />](https://github.com/Avery1493)|[<img src="https://ca.slack-edge.com/ESZCHB482-W012X6X608Z-7309c1c2dcc5-512" width = "200" />](https://github.com/gagansingh23)|[<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RLYAH-b0a1e701122c-512" width = "200" />](https://github.com/iuliastremciuc)|
-|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/avery-quinn-a178431a2/)|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://github.com/gagansingh23)|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/iulia-stremciuc-4593191a1/)|  
+|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/avery-quinn-a178431a2/)|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](http://www.linkedin.com/in/gagandeep-singh-8940821b1)|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/iulia-stremciuc-4593191a1/)|  
 
 ## Project Overview   
 Encon is a application that can help users calculate the cost in dollars and energy consumed in kWh of common household appliances. Through the app, users will also be able to track their daily energy usage of certain appliances.  
@@ -34,7 +34,7 @@ Where device and state match options in coresponding csv files; hours (0-24); da
 <img src="https://github.com/Avery1493/Avery1493.github.io/blob/master/img/enconpostman.PNG" width="600" />  
 API Request Route:  
 ```
-http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/image
+https://environment-2.eba-j6sk9zsp.us-east-1.elasticbeanstalk.com/
 ```
 API POST Request:  
 ```
@@ -58,7 +58,7 @@ API Response:
 ```
 
 ## DS API Routes  
-You can find the project at [Encon DS API](http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/)
+You can find the project at [Encon DS API](https://environment-2.eba-j6sk9zsp.us-east-1.elasticbeanstalk.com/)
 |Route| Description|
 |:---|:---|
 |`/`| Home: Shows list of devices that can be used in the calculator function |
