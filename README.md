@@ -23,7 +23,7 @@ Encon is a application that can help users calculate the cost in dollars and ene
 ```cal.py```  
 You can test out the function by using the url to insert inputs:  
 ```/<device>/<state>/<hours>/<days>```  
-```http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/Ceiling%20Fan/Missouri/8/5```  
+```https://environment-2.eba-j6sk9zsp.us-east-1.elasticbeanstalk.com/Ceiling%20Fan/Missouri/8/5```  
 Where device and state match options in coresponding csv files; hours (0-24); days of the week (0-7)
 
 ## Image Detection  
