@@ -1,5 +1,5 @@
 # Encon 2020  
-You can find the project at [Encon DS API](http://enconaq.eba-bqepxksk.us-east-1.elasticbeanstalk.com/)  
+You can find the project at [Encon DS API](https://environment-2.eba-j6sk9zsp.us-east-1.elasticbeanstalk.com/)  
 ## Contributors  
 ### Labs24  
 |Avery Quinn| Gagan Singh |Iulia Stremciuc|
