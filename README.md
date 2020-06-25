@@ -65,5 +65,5 @@ You can find the project at [Encon DS API](http://enconaq.eba-bqepxksk.us-east-1
 |`/calculator`| Calculator: Form page to calculate energy cost per year and total energy used |
 |`/<device>/<state>/<hours>/<days>`| Alternative Calculator route without form  |
 |`/upload`| Upload: Button to upload image that will run through Resnet Model |
-|`/image`| Image: Post route - will take json key[imgb64], value[encode image as base64] |
+|`/image`| Image: Post route - will take json key[imgb64], value[encoded image as base64] or key[imgurl], value[image as url] |
 

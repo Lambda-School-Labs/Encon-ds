@@ -15,7 +15,7 @@ app_info = pd.read_csv(path_app_info)
 appliances = ['dishwasher', 'washer', 'notebook', 'television', 
 'desktop_computer', 'vacuum', 'microwave', 'refrigerator', 
 'hand_blower', 'iron', 'electric_fan', 'toaster', 'space_heater', 
-'home_theater', 'entertainment_center', 'monitor']
+'home_theater', 'entertainment_center', 'monitor', 'plate_rack']
 
 model = ResNet50(weights='imagenet')
 def res_model(file):
